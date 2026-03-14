@@ -3,272 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>आध्यात्मिक तीर्थयात्रा — मार्च २०२६</title>
-
+<title>आई-बाबांची आध्यात्मिक यात्रा — मार्च २०२६</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
-*{box-sizing:border-box;margin:0;padding:0}
-
 body{
 font-family:'Noto Sans Devanagari',sans-serif;
 background:#f5f4f0;
-color:#1a1a18;
-min-height:100vh;
-padding:2rem 1rem;
+padding:2rem;
+color:#1a1a18
 }
 
-.container{max-width:720px;margin:auto}
-
-:root{
---bg-primary:#fff;
---bg-secondary:#f5f4f0;
---text-primary:#1a1a18;
---text-secondary:#5f5e5a;
---text-tertiary:#888780;
---border:rgba(0,0,0,0.12);
---radius:12px;
-}
-
-@media (prefers-color-scheme:dark){
-
-:root{
---bg-primary:#1e1e1c;
---bg-secondary:#2a2a28;
---text-primary:#e8e6de;
---text-secondary:#9c9a92;
---text-tertiary:#6e6d68;
---border:rgba(255,255,255,0.15);
-}
-
-body{background:#141412}
-
-}
+.container{max-width:700px;margin:auto}
 
 .wrap{
-background:var(--bg-primary);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:1.5rem 1.4rem 2rem;
+background:white;
+border-radius:12px;
+padding:1.5rem;
+border:1px solid rgba(0,0,0,.1)
 }
 
-/* header */
+.trip-title{font-size:18px;font-weight:600;margin-bottom:4px}
 
-.trip-title{
-font-size:18px;
-font-weight:600;
-margin-bottom:4px
-}
+.trip-sub{font-size:13px;color:#666;margin-bottom:20px}
 
-.trip-sub{
-font-size:13px;
-color:var(--text-secondary);
-margin-bottom:18px
-}
-
-/* tabs */
-
-.day-tabs{
-display:flex;
-gap:8px;
-margin-bottom:20px;
-flex-wrap:wrap
-}
+.day-tabs{display:flex;gap:8px;margin-bottom:20px}
 
 .tab{
 padding:6px 14px;
 border-radius:20px;
-border:1px solid var(--border);
-font-size:13px;
-cursor:pointer;
+border:1px solid #ddd;
 background:none;
-color:var(--text-secondary)
+cursor:pointer
 }
 
-.tab.active{
-background:#EEE;
-font-weight:500;
-color:#000
-}
-
-/* panels */
+.tab.active{background:#eee}
 
 .day-panel{display:none}
 .day-panel.active{display:block}
 
-/* banner */
-
 .day-banner{
+background:#f0efff;
+padding:14px;
 border-radius:10px;
-padding:14px 16px;
-margin-bottom:20px;
-background:#EFEFFE
+margin-bottom:20px
 }
 
-.day-label{
-font-size:11px;
-letter-spacing:.05em;
-text-transform:uppercase;
-margin-bottom:3px;
-color:#4A46A3
-}
+.day-title{font-size:16px;font-weight:600}
 
-.day-title{
-font-size:15px;
-font-weight:600
-}
-
-.day-desc{
-font-size:12px;
-margin-top:3px;
-color:#4A46A3
-}
-
-/* timeline */
-
-.timeline{
-position:relative;
-padding-left:36px
-}
+.timeline{position:relative;padding-left:35px}
 
 .timeline:before{
 content:'';
 position:absolute;
-left:13px;
-top:8px;
-bottom:8px;
+left:12px;
+top:0;
+bottom:0;
 width:1px;
-background:var(--border)
+background:#ddd
 }
 
-.stop{
-position:relative;
-margin-bottom:18px;
-cursor:pointer
-}
-
-.stop:last-child{margin-bottom:0}
+.stop{margin-bottom:18px;cursor:pointer}
 
 .dot{
 position:absolute;
-left:-29px;
-top:11px;
-width:14px;
-height:14px;
-border-radius:50%;
-border:2px solid var(--bg-primary);
-background:var(--bg-primary);
-display:flex;
-align-items:center;
-justify-content:center
-}
-
-.dot-inner{
-width:6px;
-height:6px;
+left:3px;
+width:12px;
+height:12px;
+background:#534ab7;
 border-radius:50%
 }
 
-.temple{border-color:#CECBF6}
-.temple .dot-inner{background:#534AB7}
-
-.food{border-color:#B5D4F4}
-.food .dot-inner{background:#3B8BD4}
-
-.explore{border-color:#9FE1CB}
-.explore .dot-inner{background:#1D9E75}
-
-.travel{border-color:#D3D1C7}
-.travel .dot-inner{background:#888780}
-
-.night{border-color:#FAC775}
-.night .dot-inner{background:#E85D24}
-
-/* stop card */
-
 .stop-card{
-border:1px solid var(--border);
+border:1px solid #ddd;
 border-radius:10px;
-padding:10px 13px;
-background:var(--bg-primary)
+padding:10px
 }
 
 .stop-top{
 display:flex;
-align-items:center;
 gap:8px;
-margin-bottom:4px
-}
-
-.time{
-font-size:11px;
-color:var(--text-tertiary);
-min-width:60px
-}
-
-.badge{
-font-size:10px;
-padding:2px 7px;
-border-radius:10px;
-background:#EEE;
-white-space:nowrap
-}
-
-.name{
 font-size:14px;
-font-weight:500;
-flex:1
+align-items:center
 }
 
-.expand{
-font-size:12px;
-color:var(--text-tertiary)
-}
+.time-badge{font-size:11px;color:#777}
 
-.tip{
-font-size:12px;
-line-height:1.6;
-color:var(--text-secondary);
+.stop-tip{
+font-size:13px;
+color:#555;
 max-height:0;
 overflow:hidden;
-transition:max-height .3s ease, margin-top .2s
+transition:.3s
 }
 
-.stop.open .tip{
+.stop.open .stop-tip{
 max-height:200px;
 margin-top:6px
 }
 
-.stop.open .expand{
-transform:rotate(180deg)
-}
-
-/* responsive */
-
-@media(max-width:480px){
-
-.stop-name{font-size:13px}
-
-.tab{font-size:12px;padding:5px 10px}
-
-}
-
+.expand-icon{margin-left:auto}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
 <div class="wrap">
 
 <div class="trip-title">
-🙏 आध्यात्मिक तीर्थयात्रा — मार्च २०२६
+आई-बाबांची आध्यात्मिक यात्रा — मार्च २०२६
 </div>
 
 <div class="trip-sub">
-इंदूर · उज्जैन · ओंकारेश्वर · महेश्वर — थांब्यावर टॅप करा आणि टिप वाचा
+इंदूर · उज्जैन · ओंकारेश्वर · महेश्वर — प्रत्येक ठिकाणी क्लिक केल्यावर माहिती वाचा
 </div>
 
 <div class="day-tabs">
@@ -282,257 +130,202 @@ transform:rotate(180deg)
 <div class="day-panel active" id="panel-1">
 
 <div class="day-banner">
-
-<div class="day-label">
-दिवस १ · रविवार
-</div>
-
-<div class="day-title">
-उज्जैन — महाकालाचे शहर
-</div>
-
-<div class="day-desc">
-घाट, कालभैरव, गुरुकुल, महाकाल दर्शन
-</div>
-
+<div class="day-title">उज्जैन — महाकालाची नगरी</div>
 </div>
 
 <div class="timeline">
 
 <div class="stop" onclick="toggle(this)">
-
-<div class="dot food"><div class="dot-inner"></div></div>
-
+<div class="dot"></div>
 <div class="stop-card">
-
 <div class="stop-top">
-<span class="time">7:30</span>
-<span class="badge">नाश्ता</span>
-<span class="name">पोहे-जिलेबी, विजय नगर</span>
-<span class="expand">▾</span>
+<span class="time-badge">७:३०</span>
+<span>पोहे-जिलेबी नाश्ता — विजय नगर</span>
+<span class="expand-icon">▾</span>
 </div>
-
-<div class="tip">
-इंदूरची प्रसिद्ध सुरुवात — मऊ पोहे आणि गरम जिलेबी.
+<div class="stop-tip">
+इंदूरमध्ये दिवसाची सुरुवात प्रसिद्ध पोहे-जिलेबीने करा. पोहे वर शेव, कांदा आणि लिंबू टाकून दिले जातात. गरमागरम जिलेबी सोबत खूप छान लागते.
+प्रसिद्ध ठिकाणे — अप्पूजी पोहे, रामभाई पोहे.
 </div>
-
 </div>
 </div>
 
 <div class="stop" onclick="toggle(this)">
-
-<div class="dot travel"><div class="dot-inner"></div></div>
-
+<div class="dot"></div>
 <div class="stop-card">
-
 <div class="stop-top">
-<span class="time">8:30</span>
-<span class="badge">प्रवास</span>
-<span class="name">इंदूर → उज्जैन</span>
-<span class="expand">▾</span>
+<span class="time-badge">८:३०</span>
+<span>इंदूर → उज्जैन प्रवास</span>
+<span class="expand-icon">▾</span>
 </div>
-
-<div class="tip">
-राष्ट्रीय महामार्गावरून साधारण १ तासाचा प्रवास.
+<div class="stop-tip">
+सुमारे ५५ किमी प्रवास. NH52 महामार्गाने साधारण १ तास लागतो. सकाळी ट्रॅफिक कमी असल्याने प्रवास आरामदायी होतो.
 </div>
-
 </div>
 </div>
 
 <div class="stop" onclick="toggle(this)">
-
-<div class="dot explore"><div class="dot-inner"></div></div>
-
+<div class="dot"></div>
 <div class="stop-card">
-
 <div class="stop-top">
-<span class="time">9:30</span>
-<span class="badge">भेट</span>
-<span class="name">रामघाट</span>
-<span class="expand">▾</span>
+<span class="time-badge">९:३०</span>
+<span>राम घाट — शिप्रा नदी</span>
+<span class="expand-icon">▾</span>
 </div>
-
-<div class="tip">
-शिप्रा नदीचा घाट — सकाळचे शांत वातावरण.
+<div class="stop-tip">
+उज्जैनचा सर्वात प्रसिद्ध घाट. येथे शिप्रा नदीचे दर्शन घेता येते. सकाळी वातावरण शांत असते.
 </div>
-
 </div>
 </div>
 
 <div class="stop" onclick="toggle(this)">
-
-<div class="dot temple"><div class="dot-inner"></div></div>
-
+<div class="dot"></div>
 <div class="stop-card">
-
 <div class="stop-top">
-<span class="time">10:30</span>
-<span class="badge">मंदिर</span>
-<span class="name">कालभैरव मंदिर</span>
-<span class="expand">▾</span>
+<span class="time-badge">१०:३०</span>
+<span>कालभैरव मंदिर</span>
+<span class="expand-icon">▾</span>
 </div>
-
-<div class="tip">
-येथे कालभैरवाला मद्य प्रसाद दिला जातो.
+<div class="stop-tip">
+कालभैरव मंदिरात भगवान भैरवांना मद्य प्रसाद अर्पण केला जातो. ही भारतातील अतिशय अनोखी परंपरा आहे.
 </div>
-
 </div>
 </div>
 
 <div class="stop" onclick="toggle(this)">
-
-<div class="dot temple"><div class="dot-inner"></div></div>
-
+<div class="dot"></div>
 <div class="stop-card">
-
 <div class="stop-top">
-<span class="time">5:00</span>
-<span class="badge">ज्योतिर्लिंग</span>
-<span class="name">महाकालेश्वर मंदिर</span>
-<span class="expand">▾</span>
+<span class="time-badge">१२:३०</span>
+<span>दुपारचे जेवण — महाकाल परिसर</span>
+<span class="expand-icon">▾</span>
 </div>
-
-<div class="tip">
-१२ ज्योतिर्लिंगांपैकी एक — शीघ्र दर्शन तिकीट बुक करा.
+<div class="stop-tip">
+श्री अतिथी रेस्टॉरंट किंवा महाकाल भोजनालय येथे शुद्ध शाकाहारी थाळी मिळते. दाल-रोटी, कढी-भात छान मिळतो.
 </div>
-
 </div>
 </div>
 
+<div class="stop" onclick="toggle(this)">
+<div class="dot"></div>
+<div class="stop-card">
+<div class="stop-top">
+<span class="time-badge">५:००</span>
+<span>महाकालेश्वर ज्योतिर्लिंग दर्शन</span>
+<span class="expand-icon">▾</span>
+</div>
+<div class="stop-tip">
+भारताच्या १२ ज्योतिर्लिंगांपैकी एक. शिघ्र दर्शन ऑनलाइन बुक करा — shrimahakaleshwar.com
+</div>
 </div>
 </div>
 
+</div>
+</div>
 
 <!-- DAY 2 -->
 
 <div class="day-panel" id="panel-2">
 
 <div class="day-banner">
-
-<div class="day-label">दिवस २</div>
-
-<div class="day-title">
-ओंकारेश्वर + महेश्वर
-</div>
-
-<div class="day-desc">
-ज्योतिर्लिंग, नर्मदा घाट, किल्ला
-</div>
-
+<div class="day-title">ओंकारेश्वर + महेश्वर</div>
 </div>
 
 <div class="timeline">
 
 <div class="stop" onclick="toggle(this)">
-<div class="dot temple"><div class="dot-inner"></div></div>
+<div class="dot"></div>
 <div class="stop-card">
 <div class="stop-top">
-<span class="time">9:30</span>
-<span class="badge">ज्योतिर्लिंग</span>
-<span class="name">ओंकारेश्वर</span>
-<span class="expand">▾</span>
+<span class="time-badge">९:३०</span>
+<span>ओंकारेश्वर ज्योतिर्लिंग</span>
+<span class="expand-icon">▾</span>
 </div>
-<div class="tip">
-नर्मदेच्या बेटावर वसलेले प्रसिद्ध ज्योतिर्लिंग.
+<div class="stop-tip">
+नर्मदा नदीच्या बेटावर वसलेले मंदिर. नावेतून मंदिराकडे जाणे खूप सुंदर अनुभव असतो.
 </div>
 </div>
 </div>
 
 <div class="stop" onclick="toggle(this)">
-<div class="dot explore"><div class="dot-inner"></div></div>
+<div class="dot"></div>
 <div class="stop-card">
 <div class="stop-top">
-<span class="time">3:00</span>
-<span class="badge">भेट</span>
-<span class="name">महेश्वर किल्ला</span>
-<span class="expand">▾</span>
+<span class="time-badge">३:००</span>
+<span>महेश्वर किल्ला आणि घाट</span>
+<span class="expand-icon">▾</span>
 </div>
-<div class="tip">
-नर्मदेच्या काठावर राणी अहिल्याबाईंचा ऐतिहासिक किल्ला.
+<div class="stop-tip">
+राणी अहिल्याबाई होळकरांचा किल्ला. नर्मदा घाट खूप सुंदर आहे. येथे संध्याकाळची नर्मदा आरती पाहायला मिळते.
 </div>
 </div>
 </div>
 
 <div class="stop" onclick="toggle(this)">
-<div class="dot night"><div class="dot-inner"></div></div>
+<div class="dot"></div>
 <div class="stop-card">
 <div class="stop-top">
-<span class="time">9:30</span>
-<span class="badge">रात्र बाजार</span>
-<span class="name">सराफा बाजार</span>
-<span class="expand">▾</span>
+<span class="time-badge">९:३०</span>
+<span>सराफा बाजार — नाईट फूड</span>
+<span class="expand-icon">▾</span>
 </div>
-<div class="tip">
-भुट्टे की खीस, गरडू, दही वडा जरूर खा.
+<div class="stop-tip">
+इंदूरचे प्रसिद्ध नाईट फूड मार्केट. भुट्टे का कीस, गराडू, दही वडा, मालपुआ जरूर खा.
 </div>
-</div>
-</div>
-
 </div>
 </div>
 
+</div>
+</div>
 
 <!-- DAY 3 -->
 
 <div class="day-panel" id="panel-3">
 
 <div class="day-banner">
-
-<div class="day-label">दिवस ३</div>
-
-<div class="day-title">
-इंदूर शहर
-</div>
-
-<div class="day-desc">
-मंदिरे, बाजार आणि प्रस्थान
-</div>
-
+<div class="day-title">इंदूर शहर दर्शन</div>
 </div>
 
 <div class="timeline">
 
 <div class="stop" onclick="toggle(this)">
-<div class="dot temple"><div class="dot-inner"></div></div>
+<div class="dot"></div>
 <div class="stop-card">
 <div class="stop-top">
-<span class="time">7:00</span>
-<span class="badge">मंदिर</span>
-<span class="name">खजराना गणपती</span>
-<span class="expand">▾</span>
+<span class="time-badge">७:००</span>
+<span>खजराना गणपती मंदिर</span>
+<span class="expand-icon">▾</span>
 </div>
-<div class="tip">
-इंदूरचे सर्वात प्रसिद्ध गणपती मंदिर.
+<div class="stop-tip">
+इंदूरचे सर्वात प्रसिद्ध गणपती मंदिर. येथे केलेली मनोकामना पूर्ण होते असे मानले जाते.
 </div>
 </div>
 </div>
 
 <div class="stop" onclick="toggle(this)">
-<div class="dot explore"><div class="dot-inner"></div></div>
+<div class="dot"></div>
 <div class="stop-card">
 <div class="stop-top">
-<span class="time">11:30</span>
-<span class="badge">भेट</span>
-<span class="name">राजवाडा पॅलेस</span>
-<span class="expand">▾</span>
+<span class="time-badge">११:३०</span>
+<span>राजवाडा पॅलेस</span>
+<span class="expand-icon">▾</span>
 </div>
-<div class="tip">
-होळकर घराण्याचा ऐतिहासिक राजवाडा.
+<div class="stop-tip">
+होळकर घराण्याचा ऐतिहासिक राजवाडा. मराठा आणि मुघल शैलीचे सुंदर मिश्रण.
 </div>
 </div>
 </div>
 
 <div class="stop" onclick="toggle(this)">
-<div class="dot travel"><div class="dot-inner"></div></div>
+<div class="dot"></div>
 <div class="stop-card">
 <div class="stop-top">
-<span class="time">7:00</span>
-<span class="badge">प्रस्थान</span>
-<span class="name">इंदूर स्थानक → नागपूर</span>
-<span class="expand">▾</span>
+<span class="time-badge">२:००</span>
+<span>छप्पन दुकान — स्ट्रीट फूड</span>
+<span class="expand-icon">▾</span>
 </div>
-<div class="tip">
-संध्याकाळी ७ वाजता स्टेशनकडे निघा.
+<div class="stop-tip">
+इंदूरचे प्रसिद्ध फूड स्ट्रीट. खोपरा पेटिस, चाट, कुल्फी जरूर खा.
 </div>
 </div>
 </div>
