@@ -2,833 +2,1071 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>आई-बाबांची आध्यात्मिक यात्रा — मार्च २०२६</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 
-body{
-font-family:'Noto Sans Devanagari',sans-serif;
-background:#f5f4f0;
-padding:2rem;
-color:#1a1a18
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f5f5f7;
+  --surface:   #ffffff;
+  --surface2:  #f5f5f7;
+  --text1:     #1d1d1f;
+  --text2:     #6e6e73;
+  --text3:     #aeaeb2;
+  --accent:    #0071e3;
+  --accent-bg: #e8f0fb;
+  --amber:     #bf5a00;
+  --amber-bg:  #fff4e6;
+  --amber-br:  #f5c07a;
+  --sep:       rgba(0,0,0,0.08);
+  --card-shadow: 0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --font: 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.container{max-width:700px;margin:auto}
-
-.wrap{
-background:white;
-border-radius:12px;
-padding:1.5rem;
-border:1px solid rgba(0,0,0,.1)
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text1);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-.trip-title{font-size:18px;font-weight:600;margin-bottom:4px}
-
-.trip-sub{font-size:13px;color:#666;margin-bottom:20px}
-
-.day-tabs{display:flex;gap:8px;margin-bottom:20px}
-
-.tab{
-padding:6px 14px;
-border-radius:20px;
-border:1px solid #ddd;
-background:none;
-cursor:pointer;
-font-family:'Noto Sans Devanagari',sans-serif;
-font-size:14px
+/* ── Page shell ── */
+.page {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 0 0 60px;
 }
 
-.tab.active{background:#eee}
-
-.day-panel{display:none}
-.day-panel.active{display:block}
-
-.day-banner{
-background:#f0efff;
-padding:14px;
-border-radius:10px;
-margin-bottom:20px
+/* ── Hero header ── */
+.hero {
+  background: var(--surface);
+  padding: 52px 24px 28px;
+  border-bottom: 1px solid var(--sep);
 }
 
-.day-title{font-size:16px;font-weight:600}
-
-.timeline{position:relative;padding-left:35px}
-
-.timeline:before{
-content:'';
-position:absolute;
-left:12px;
-top:0;
-bottom:0;
-width:1px;
-background:#ddd
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 
-.stop{margin-bottom:18px;cursor:pointer}
-
-.dot{
-position:absolute;
-left:3px;
-width:12px;
-height:12px;
-background:#534ab7;
-border-radius:50%
+.hero-title {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text1);
+  margin-bottom: 6px;
 }
 
-/* Optional stop dot — amber colour */
-.stop.optional .dot{
-background:#bf7515;
-border:2px solid #ef9f27
+.hero-sub {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-bottom: 18px;
 }
 
-.stop-card{
-border:1px solid #ddd;
-border-radius:10px;
-padding:10px
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
 }
 
-/* Optional stop card — slightly different border */
-.stop.optional .stop-card{
-border:1px dashed #d4a017;
-background:#fffdf5
+.pill {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--surface2);
+  color: var(--text2);
+  border: 1px solid var(--sep);
 }
 
-.stop-top{
-display:flex;
-gap:8px;
-font-size:14px;
-align-items:center;
-flex-wrap:wrap
+.pill.opt {
+  background: var(--amber-bg);
+  color: var(--amber);
+  border-color: var(--amber-br);
 }
 
-.time-badge{
-font-size:11px;
-color:#777;
-white-space:nowrap
+/* ── Day tab bar ── */
+.tab-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.88);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--sep);
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab {
+  flex-shrink: 0;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all .2s ease;
+  white-space: nowrap;
 }
 
-/* Badge shown on optional stops */
-.opt-badge{
-font-size:10px;
-background:#faeeda;
-color:#854f0b;
-border:1px solid #ef9f27;
-border-radius:20px;
-padding:1px 8px;
-white-space:nowrap;
-font-weight:500
+.tab.active {
+  background: var(--text1);
+  color: #fff;
 }
 
-.stop-tip{
-font-size:13px;
-color:#555;
-max-height:0;
-overflow:hidden;
-transition:.3s
+/* ── Day panel ── */
+.day-panel { display: none; }
+.day-panel.active { display: block; }
+
+/* ── Day banner ── */
+.day-banner {
+  padding: 20px 20px 16px;
 }
 
-.stop.open .stop-tip{
-max-height:300px;
-margin-top:6px
+.day-num {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: 4px;
 }
 
-.expand-icon{margin-left:auto}
-
-.section-label{
-font-size:11px;
-font-weight:600;
-color:#534ab7;
-letter-spacing:.5px;
-margin:20px 0 8px 0;
-text-transform:uppercase
+.day-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text1);
+  line-height: 1.3;
 }
 
-.section-label.optional-label{
-color:#854f0b
+.day-sub {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 3px;
 }
+
+/* ── Section label ── */
+.section {
+  padding: 18px 20px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  color: var(--text3);
+  text-transform: uppercase;
+}
+
+/* ── Timeline card list ── */
+.stop-list {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* group = visual card group */
+.stop-group {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.stop {
+  position: relative;
+  cursor: pointer;
+  border-bottom: 1px solid var(--sep);
+  transition: background .15s ease;
+}
+.stop:last-child { border-bottom: none; }
+.stop:active { background: var(--surface2); }
+
+.stop-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+}
+
+/* left: time column */
+.stop-time {
+  flex-shrink: 0;
+  min-width: 56px;
+  text-align: right;
+}
+
+.stop-time span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text3);
+  line-height: 1.6;
+}
+
+/* middle: icon dot */
+.stop-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text3);
+  margin-top: 7px;
+  transition: background .2s;
+}
+
+.stop.highlight .stop-dot { background: var(--accent); width: 10px; height: 10px; margin-top: 6px; }
+.stop.optional .stop-dot  { background: var(--amber-br); }
+
+/* right: content */
+.stop-content { flex: 1; min-width: 0; }
+
+.stop-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text1);
+  line-height: 1.4;
+}
+
+.stop.highlight .stop-title { color: var(--accent); }
+
+.stop-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: 20px;
+  background: var(--surface2);
+  color: var(--text2);
+  border: 1px solid var(--sep);
+}
+
+.badge.opt {
+  background: var(--amber-bg);
+  color: var(--amber);
+  border-color: var(--amber-br);
+}
+
+.badge.blue {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-color: #b0ceec;
+}
+
+/* chevron */
+.stop-chevron {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  color: var(--text3);
+  transition: transform .25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stop-chevron svg { width: 12px; height: 12px; }
+.stop.open .stop-chevron { transform: rotate(180deg); }
+
+/* expandable tip */
+.stop-tip {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease, padding .3s ease;
+}
+
+.stop.open .stop-tip { max-height: 400px; }
+
+.stop-tip-inner {
+  padding: 0 16px 14px 88px;
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.65;
+}
+
+/* highlight card — full accent bg */
+.stop.highlight {
+  background: linear-gradient(135deg, #f0f7ff 0%, #e8f2ff 100%);
+}
+
+.stop.optional { background: #fffcf5; }
+
+/* ── Food tag strip ── */
+.food-strip {
+  margin: 4px 16px 0;
+  padding: 14px 16px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+}
+
+.food-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.food-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.food-tag {
+  font-size: 13px;
+  font-weight: 400;
+  padding: 5px 13px;
+  border-radius: 20px;
+  background: var(--surface2);
+  color: var(--text2);
+  border: 1px solid var(--sep);
+}
+
+/* ── Tips card ── */
+.tips-card {
+  margin: 8px 16px 0;
+  padding: 16px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+}
+
+.tips-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.tip-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--sep);
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+.tip-row:last-child { border-bottom: none; padding-bottom: 0; }
+.tip-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+
+/* ── Spacer ── */
+.spacer { height: 12px; }
 
 </style>
 </head>
-
 <body>
 
-<div class="container">
-<div class="wrap">
+<div class="page">
 
-<div class="trip-title">
-आई-बाबांची आध्यात्मिक यात्रा — मार्च २०२६
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-eyebrow">आध्यात्मिक यात्रा · मार्च २०२६</div>
+  <div class="hero-title">आई-बाबांची<br>तीर्थयात्रा</div>
+  <div class="hero-sub">इंदूर · उज्जैन · ओंकारेश्वर · महेश्वर<br>३ ज्योतिर्लिंगे · ३ दिवस</div>
+  <div class="hero-pills">
+    <span class="pill">नागपूर → इंदूर</span>
+    <span class="pill">२२–२४ मार्च</span>
+    <span class="pill opt">🟡 वेळ मिळाल्यास = ऐच्छिक</span>
+  </div>
 </div>
 
-<div class="trip-sub">
-इंदूर · उज्जैन · ओंकारेश्वर · महेश्वर
-&nbsp;·&nbsp;
-<span style="background:#faeeda;color:#854f0b;border-radius:20px;padding:1px 8px;font-size:11px;border:1px solid #ef9f27">🟡 वेळ मिळाल्यास = ऐच्छिक थांबा</span>
+<!-- Tab bar -->
+<div class="tab-bar">
+  <button class="tab active" onclick="switchDay(1)">दिवस १ · २२ मार्च</button>
+  <button class="tab" onclick="switchDay(2)">दिवस २ · २३ मार्च</button>
+  <button class="tab" onclick="switchDay(3)">दिवस ३ · २४ मार्च</button>
 </div>
 
-<div class="day-tabs">
-<button class="tab active" onclick="switchDay(1)">२२ मार्च</button>
-<button class="tab" onclick="switchDay(2)">२३ मार्च</button>
-<button class="tab" onclick="switchDay(3)">२४ मार्च</button>
-</div>
-
-<!-- ═══════════════════ DAY 1 ═══════════════════ -->
-
+<!-- ═══════════ DAY 1 ═══════════ -->
 <div class="day-panel active" id="panel-1">
 
-<div class="day-banner">
-<div class="day-title">
-दिवस १ — रविवार, २२ मार्च | उज्जैन — महाकालाची नगरी
-</div>
+  <div class="day-banner">
+    <div class="day-num">दिवस १ · रविवार, २२ मार्च</div>
+    <div class="day-title">उज्जैन — महाकालाची नगरी</div>
+    <div class="day-sub">इंदूर ते उज्जैन · ५५ किमी · परत इंदूर</div>
+  </div>
+
+  <div class="section">🌅 सकाळ — इंदूरहून प्रयाण</div>
+  <div class="stop-list">
+    <div class="stop-group">
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>७:३० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">नाश्ता — पोहे-जिलेबी</div>
+            <div class="stop-badges"><span class="badge">विजय नगर, इंदूर</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">इंदूरचा प्रसिद्ध नाश्ता. गरम पोहे वर शेव, कांदा, कोथिंबीर आणि लिंबू. सोबत कुरकुरीत जिलेबी — हे combination फक्त इंदूरमध्येच मिळते!</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>८:३० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">इंदूर → उज्जैन प्रवास</div>
+            <div class="stop-badges"><span class="badge">५५ किमी · ~१ तास</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">आरामदायी प्रवास. वाटेत छोटी थांबणे शक्य.</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">🛕 मंदिरे — सकाळ (९:३० AM – १:३० PM)</div>
+  <div class="stop-list">
+    <div class="stop-group">
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>९:३० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">राम घाट</div>
+            <div class="stop-badges"><span class="badge">शिप्रा नदी</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">शिप्रा नदीवरील प्रसिद्ध घाट. शांत सकाळी दर्शन. कुंभमेळ्याच्या वेळी लाखो भाविक येथे पवित्र स्नान करतात.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>१०:१५ AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">काल भैरव मंदिर</div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">भगवान भैरवांना मद्य प्रसाद अर्पण करण्याची अनोखी परंपरा. उज्जैनच्या रक्षणासाठी या देवतेचे मोठे महत्त्व मानले जाते.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>११:०० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">हरसिद्धि माता मंदिर</div>
+            <div class="stop-badges"><span class="badge">५१ शक्तीपीठांपैकी एक</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">मंदिराच्या दोन्ही बाजूंना असलेले भव्य दीपस्तंभ प्रसिद्ध आहेत. नवरात्रीत हजारो दिवे एकाच वेळी प्रज्वलित केले जातात.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>११:४५ AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">संदीपनी आश्रम</div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">भगवान श्रीकृष्ण, बलराम आणि सुदामा यांनी येथे गुरुकुलात शिक्षण घेतले. अत्यंत शांत आणि मनाला प्रसन्न करणारे ठिकाण.</div></div>
+      </div>
+
+      <div class="stop optional" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>~१२:३० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">मंगलनाथ मंदिर</div>
+            <div class="stop-badges"><span class="badge opt">वेळ मिळाल्यास</span><span class="badge">मंगळाचे जन्मस्थान</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">हे मंदिर मंगळ ग्रहाचे जन्मस्थान मानले जाते. मंगळ शांतीसाठी येथे अनेक भाविक येतात.</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">🍽️ दुपार</div>
+  <div class="stop-list">
+    <div class="stop-group">
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>१:३० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">जेवण — Shree Atithi Veg</div>
+            <div class="stop-badges"><span class="badge">महाकाल परिसर</span><span class="badge">सात्विक थाळी</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">शुद्ध शाकाहारी सात्विक जेवण. डाळ, भाजी, पुरी/भात आणि गोड पदार्थ — डाळ बाटी चुरमा नक्की मागवा.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>२:१५ PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">वेदशाळा — Jantar Mantar</div>
+            <div class="stop-badges"><span class="badge">₹१५ प्रवेश</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">राजा जयसिंग यांनी १८व्या शतकात बांधलेली प्राचीन खगोलशास्त्रीय वेधशाळा. सावलीत, शांत ठिकाण — दुपारच्या विश्रांतीसाठी योग्य.</div></div>
+      </div>
+
+      <div class="stop optional" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>~३:०० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">चिंतामण गणेश मंदिर</div>
+            <div class="stop-badges"><span class="badge opt">वेळ मिळाल्यास</span><span class="badge">स्वयंभू</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">उज्जैनमधील गणेशाचे सर्वात जुने स्वयंभू मंदिर. येथे दर्शन घेतल्याने सर्व चिंता दूर होतात असे मानले जाते.</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">⭐ मुख्य आकर्षण — संध्याकाळ</div>
+  <div class="stop-list">
+    <div class="stop-group">
+
+      <div class="stop highlight" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>५:०० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">महाकालेश्वर ज्योतिर्लिंग दर्शन</div>
+            <div class="stop-badges"><span class="badge blue">ऑनलाइन बुकिंग आवश्यक</span><span class="badge">₹२५०</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">१२ ज्योतिर्लिंगांपैकी एक. शिघ्र दर्शन तिकीट shrimahakaleshwar.com वर ऑनलाइन बुक करा. ५:३० पर्यंत दर्शन पूर्ण. संध्या आरती मंदिर परिसरातच ऐकण्याचा प्रयत्न करा — अविस्मरणीय!</div></div>
+      </div>
+
+      <div class="stop highlight" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>६:०० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">✨ महाकाल लोक कॉरिडॉर</div>
+            <div class="stop-badges"><span class="badge blue">गोल्डन अवर + रोषणाई</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">दर्शनानंतर लगेच कॉरिडॉरमध्ये प्रवेश. सूर्यास्ताच्या वेळी सोनेरी प्रकाशात आणि नंतर विद्युत रोषणाईत ९०० पेक्षा जास्त शिवपुराणातील शिल्पे. हळूहळू चाला — कमीत कमी ४५-६० मिनिटे द्या.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>७:१५ PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">संध्याकाळचे स्नॅक्स</div>
+            <div class="stop-badges"><span class="badge">भुट्टे का कीस</span><span class="badge">मालपुआ रबडी</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">कॉरिडॉर एग्झिटजवळील स्टॉल्सवर भुट्टे का कीस आणि मालपुआ-रबडी — उज्जैनचे वैशिष्ट्यपूर्ण पदार्थ. यात्रा साजरी करा!</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">🌙 परत इंदूर</div>
+  <div class="stop-list">
+    <div class="stop-group">
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>७:३० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">उज्जैन → इंदूर प्रयाण</div>
+            <div class="stop-badges"><span class="badge">५५ किमी · ~१.५ तास</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">रात्री ९ पर्यंत इंदूर. ५६ दुकान किंवा हॉटेलमध्ये जेवण. उद्याच्या लांब दिवसासाठी लवकर झोपणे उत्तम.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
 </div>
 
-<div class="timeline">
-
-<div class="section-label">🌅 सकाळ — इंदूर ते उज्जैन</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">७:३० AM</span>
-<span>नाश्ता — पोहे-जिलेबी (विजय नगर, इंदूर)</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-इंदूरचा प्रसिद्ध नाश्ता. गरम पोहे वर शेव, कांदा, कोथिंबीर आणि लिंबू. सोबत कुरकुरीत जिलेबी.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">८:३० AM</span>
-<span>इंदूर → उज्जैन प्रवास (५५ किमी)</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-सुमारे १ तासाचा आरामदायी प्रवास.
-</div>
-</div>
-</div>
-
-<div class="section-label">🛕 सकाळची मंदिरे (९:३० AM – १:३० PM)</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">९:३० AM</span>
-<span>राम घाट — उज्जैन</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-शिप्रा नदीवरील प्रसिद्ध घाट. शांत सकाळी दर्शन आणि थोडा वेळ विश्रांती. सिंहस्थ कुंभमेळ्याच्या वेळी येथे लाखो भाविक पवित्र स्नान करतात.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">१०:३० AM</span>
-<span>काल भैरव मंदिर</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-उज्जैनमधील प्रसिद्ध मंदिर जिथे भगवान भैरवांना मद्य प्रसाद अर्पण करण्याची अनोखी परंपरा आहे. उज्जैनच्या रक्षणासाठी या देवतेचे मोठे महत्त्व मानले जाते.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">११:१५ AM</span>
-<span>हरसिद्धि माता मंदिर</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-हे ५१ शक्तीपीठांपैकी एक आहे. मंदिराच्या दोन्ही बाजूंना असलेले भव्य दीपस्तंभ (दीपमाळा) अत्यंत प्रसिद्ध आहेत — नवरात्रीत हजारो दिवे एकाच वेळी प्रज्वलित केले जातात.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">११:३० AM</span>
-<span>संदीपनी आश्रम</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-भगवान श्रीकृष्ण, बलराम आणि सुदामा यांनी येथे गुरुकुलात शिक्षण घेतले असे मानले जाते. अत्यंत शांत आणि मनाला प्रसन्न करणारे ठिकाण.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">१२:३० PM</span>
-<span>मंगलधाम मंदिर</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-उज्जैनमधील शांत आणि सुंदर मंदिर.
-</div>
-</div>
-</div>
-
-<div class="section-label optional-label">🟡 वेळ मिळाल्यास — सकाळ</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~१:०० PM</span>
-<span>मंगलनाथ मंदिर</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-हे मंदिर मंगळ ग्रहाचे जन्मस्थान मानले जाते. ज्योतिषशास्त्राच्या दृष्टीने या ठिकाणाला खूप महत्त्व असून येथे मंगळ शांतीसाठी अनेक भाविक येतात. शिप्रा नदीच्या काठावर वसलेले हे मंदिर प्राचीन आहे.
-</div>
-</div>
-</div>
-
-<div class="section-label">🍽️ दुपार (१:३० – ४:३० PM)</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">१:३० PM</span>
-<span>दुपारचे जेवण — Shree Atithi Veg Restaurant</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-महाकाल मंदिराजवळ. शुद्ध शाकाहारी सात्विक जेवण. पूर्ण थाळी — डाळ, भाजी, पुरी/भात आणि गोड पदार्थ.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">२:०० PM</span>
-<span>वेदशाळा (Observatory)</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-महाराजा जयसिंग यांनी १८व्या शतकात बांधलेली प्राचीन खगोलशास्त्रीय वेधशाळा. जयपूरच्या जंतर मंतरप्रमाणेच. प्रवेश शुल्क फक्त ₹१५.
-</div>
-</div>
-</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~२:४५ PM</span>
-<span>चिंतामण गणेश मंदिर</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-हे उज्जैनमधील गणेशाचे सर्वात जुने आणि पवित्र स्वयंभू मंदिर आहे. असे मानले जाते की येथे दर्शन घेतल्याने सर्व चिंता दूर होतात. वेदशाळेपासून जवळच आहे.
-</div>
-</div>
-</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~३:३० PM</span>
-<span>इस्कॉन मंदिर (ISKCON)</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-भगवान श्रीकृष्णाला समर्पित असलेले पांढऱ्या संगमरवरी मंदिर. त्याच्या शांततेसाठी आणि सुंदर वास्तुकलेसाठी प्रसिद्ध. संदीपनी आश्रमाशेजारी असल्याने वाट वाकडी करावी लागत नाही.
-</div>
-</div>
-</div>
-
-<div class="section-label">⭐ संध्याकाळचा मुख्य कार्यक्रम (५:०० – ८:३० PM)</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">५:०० PM</span>
-<span>महाकालेश्वर मंदिर दर्शन</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-१२ ज्योतिर्लिंगांपैकी एक. शिघ्र दर्शन तिकीट ऑनलाइन बुक करा — shrimahakaleshwar.com (₹२५०). ५:३० पर्यंत दर्शन पूर्ण होईल. संध्याकाळची संध्या आरती मंदिर परिसरातच ऐकण्याचा प्रयत्न करा.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">६:०० PM</span>
-<span>✨ महाकाल लोक कॉरिडॉर — गोल्डन अवर</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-दर्शनानंतर लगेच कॉरिडॉरमध्ये प्रवेश करा. सूर्यास्ताच्या वेळी सोनेरी प्रकाशात आणि नंतर विद्युत रोषणाईत ९०० पेक्षा जास्त शिवपुराणातील शिल्पे पाहण्याचा अनुभव अविस्मरणीय आहे. हळूहळू चाला — यासाठी कमीत कमी ४५-६० मिनिटे द्या.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">७:०० PM</span>
-<span>कॉरिडॉर बाहेर स्नॅक्स</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-भुट्टे का कीस आणि मालपुआ-रबडी — कॉरिडॉर एग्झिटजवळील स्टॉल्सवर उपलब्ध. उज्जैनचे वैशिष्ट्यपूर्ण पदार्थ.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">९:०० PM</span>
-<span>इंदूरला परत — हॉटेलमध्ये जेवण</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-५६ दुकानवरून जेवण घ्या किंवा हॉटेलमध्ये विश्रांती. उद्याच्या लांब दिवसासाठी लवकर झोपणे उत्तम.
-</div>
-</div>
-</div>
-
-</div><!-- end timeline -->
-</div><!-- end panel-1 -->
-
-<!-- ═══════════════════ DAY 2 ═══════════════════ -->
-
+<!-- ═══════════ DAY 2 ═══════════ -->
 <div class="day-panel" id="panel-2">
 
-<div class="day-banner">
-<div class="day-title">
-दिवस २ — सोमवार, २३ मार्च | ओंकारेश्वर + महेश्वर + सराफा
-</div>
+  <div class="day-banner">
+    <div class="day-num">दिवस २ · सोमवार, २३ मार्च</div>
+    <div class="day-title">ओंकारेश्वर + महेश्वर</div>
+    <div class="day-sub">७७ किमी + ३५ किमी · सराफा रात्री</div>
+  </div>
+
+  <div class="section">🌅 सकाळ — प्रयाण</div>
+  <div class="stop-list">
+    <div class="stop-group">
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>७:०० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">हॉटेल नाश्ता व प्रयाण</div>
+            <div class="stop-badges"><span class="badge">ओंकारेश्वर · ७७ किमी · ~२ तास</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">वाटेत हायवे ढाब्यावर पोहे-जिलेबी घेता येतील.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">🏝️ ओंकारेश्वर (९:३० AM – २:०० PM)</div>
+  <div class="stop-list">
+    <div class="stop-group">
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>९:३० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">नौकाविहार — बेटावर प्रवेश</div>
+            <div class="stop-badges"><span class="badge">₹२०–३०</span><span class="badge blue">पुलाऐवजी नावेनेच जा!</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">नर्मदेतून बेटावर पोहोचण्याचा अनुभव वेगळाच आहे. नावेतून संपूर्ण बेटाचा 'ॐ' आकार जवळून पाहता येतो.</div></div>
+      </div>
+
+      <div class="stop highlight" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>१०:०० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">ओंकारेश्वर ज्योतिर्लिंग</div>
+            <div class="stop-badges"><span class="badge blue">१२ ज्योतिर्लिंगांपैकी एक</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">नर्मदा नदीतील मांधाता बेटावर वसलेले प्रसिद्ध ज्योतिर्लिंग. बेटाचा आकार नैसर्गिकरित्या 'ॐ' सारखा आहे. सकाळी १० नंतर गर्दी कमी होते.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>११:०० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">ममलेश्वर मंदिर</div>
+            <div class="stop-badges"><span class="badge blue">यात्रा पूर्णतेसाठी अनिवार्य!</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">नर्मदेच्या दक्षिण तटावरील हे मंदिर अत्यंत महत्त्वाचे — ओंकारेश्वर आणि ममलेश्वर दोन्ही दर्शनानंतरच यात्रा पूर्ण मानली जाते. बहुतेक भाविक हे मंदिर चुकवतात!</div></div>
+      </div>
+
+      <div class="stop optional" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>~११:३० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">सिद्धनाथ मंदिर</div>
+            <div class="stop-badges"><span class="badge opt">वेळ मिळाल्यास</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">प्राचीन मंदिर — दगडी खांबांवरील कोरीव काम अत्यंत सुंदर आहे. बेटावरच असल्याने जास्त वेळ लागत नाही.</div></div>
+      </div>
+
+      <div class="stop optional" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>~१२:१५ PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">गोविंद भगवत्पाद गुहा</div>
+            <div class="stop-badges"><span class="badge opt">वेळ मिळाल्यास</span><span class="badge">शंकराचार्यांचे स्थान</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">येथेच आद्य शंकराचार्यांनी अद्वैत वेदांताचे शिक्षण घेतले. भारतीय तत्त्वज्ञानाच्या इतिहासातील अत्यंत महत्त्वाचे स्थान.</div></div>
+      </div>
+
+      <div class="stop optional" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>~१२:४५ PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">झुला पूल — Hanging Bridge</div>
+            <div class="stop-badges"><span class="badge opt">वेळ मिळाल्यास</span><span class="badge">📸 फोटो स्पॉट</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">नर्मदेच्या एका तटावरून दुसऱ्या तटावर जाण्यासाठी झुलता पूल — येथून नदीचे विहंगम दृश्य दिसते.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>१:०० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">दुपारचे जेवण</div>
+            <div class="stop-badges"><span class="badge">घाटाजवळ सात्विक थाळी</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">घाटाजवळील साध्या ढाब्यावर सात्विक थाळी — डाळ, भात, भाजी, रोटी. मंदिर परिसरात शुद्ध शाकाहारी जेवण सहज मिळते.</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">🏰 महेश्वर (३:०० – ६:३० PM)</div>
+  <div class="stop-list">
+    <div class="stop-group">
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>३:०० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">अहिल्या किल्ला व नर्मदा घाट</div>
+            <div class="stop-badges"><span class="badge">ओंकारेश्वरपासून ३५ किमी</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">राणी अहिल्याबाई होळकरांचा ऐतिहासिक किल्ला नर्मदेच्या काठावर. कमी गर्दी, शाही वातावरण. संध्याकाळची आरती ~६ PM — अत्यंत सुंदर.</div></div>
+      </div>
+
+      <div class="stop optional" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>~५:०० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">महेश्वरी साड्या</div>
+            <div class="stop-badges"><span class="badge opt">वेळ मिळाल्यास</span><span class="badge">विणकर सहकारी संस्था</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">जगप्रसिद्ध महेश्वरी रेशीम साड्या किल्ल्यालगतच्या विणकर सहकारी संस्थेत उपलब्ध. आईसाठी उत्तम भेट!</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>६:३० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">महेश्वर → इंदूर प्रयाण</div>
+            <div class="stop-badges"><span class="badge">~२ तास · रात्री ८:३०</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">इंदूरला पोहोचायला साधारण ८:३० PM होईल. सराफाला जाण्यापूर्वी थोडा वेळ हॉटेलवर विश्रांती घ्या.</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">🌙 रात्री — सराफा बाजार</div>
+  <div class="stop-list">
+    <div class="stop-group">
+      <div class="stop highlight" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>९:३० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">सराफा बाजार — नाईट फूड स्ट्रीट</div>
+            <div class="stop-badges"><span class="badge blue">इंदूरची शान</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">भुट्टे का कीस · गराडू · दही वडा · मालपुआ · शिकंजी · दुधाबरोबर जिलेबी — हळूहळू चाला, प्रत्येक स्टॉलवर थांबा. हे जेवण नाही, अनुभव आहे!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
 </div>
 
-<div class="timeline">
-
-<div class="section-label">🌅 सकाळ — इंदूर ते ओंकारेश्वर</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">७:०० AM</span>
-<span>हॉटेल नाश्ता व ओंकारेश्वरला प्रस्थान</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-वाटेत हायवे ढाब्यावर पोहे-जिलेबी घेता येतील. ओंकारेश्वर ७७ किमी — सुमारे २ तास.
-</div>
-</div>
-</div>
-
-<div class="section-label">🏝️ ओंकारेश्वर (९:३० AM – २:०० PM)</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">९:३० AM</span>
-<span>नौकाविहार — बेटावर प्रवेश</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-पुलाऐवजी नावेने जाणे श्रेयस्कर! नर्मदेतून बेटावर पोहोचण्याचा अनुभव वेगळाच आहे. नावेतून संपूर्ण बेटाचा 'ॐ' आकार आणि नैसर्गिक सौंदर्य जवळून पाहता येतो. भाडे फक्त ₹२०-३०.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">१०:०० AM</span>
-<span>ओंकारेश्वर ज्योतिर्लिंग</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-नर्मदा नदीतील मांधाता बेटावर वसलेले प्रसिद्ध ज्योतिर्लिंग. बेटाचा आकार नैसर्गिकरित्या 'ॐ' सारखा आहे. सकाळी १० वाजेनंतर गर्दी कमी होते.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">११:०० AM</span>
-<span>ममलेश्वर मंदिर (अमलेश्वर)</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-नर्मदेच्या दक्षिण तटावरील हे मंदिर अत्यंत महत्त्वाचे आहे — ओंकारेश्वर आणि ममलेश्वर या दोन्ही ठिकाणच्या दर्शनानंतरच ज्योतिर्लिंगाची यात्रा पूर्ण मानली जाते. बहुतेक भाविक हे मंदिर चुकवतात — चुकवू नका!
-</div>
-</div>
-</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~११:३० AM</span>
-<span>सिद्धनाथ मंदिर</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-हे एक प्राचीन मंदिर असून येथील दगडी खांबांवरील कोरीव काम आणि वास्तुकला अत्यंत सुंदर आहे. बेटावरच असल्याने जास्त वेळ लागत नाही.
-</div>
-</div>
-</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~१२:०० PM</span>
-<span>गोविंद भगवत्पाद गुहा</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-येथेच आद्य शंकराचार्यांनी त्यांचे गुरु गोविंद भगवत्पाद यांची भेट घेतली आणि अद्वैत वेदांताचे शिक्षण घेतले. भारतीय तत्त्वज्ञानाच्या इतिहासातील अत्यंत महत्त्वाचे स्थान.
-</div>
-</div>
-</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~१२:३० PM</span>
-<span>झुला पूल (Hanging Bridge)</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-नर्मदेच्या एका तटावरून दुसऱ्या तटावर जाण्यासाठी असलेला हा झुलता पूल पर्यटकांचे प्रमुख आकर्षण आहे. येथून नदीचे विहंगम दृश्य दिसते — फोटोसाठी उत्तम!
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">१:०० PM</span>
-<span>ओंकारेश्वरमध्ये दुपारचे जेवण</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-घाटाजवळील साध्या ढाब्यावर सात्विक थाळी — डाळ, भात, भाजी, रोटी. मंदिर परिसरात शुद्ध शाकाहारी जेवण सहज मिळते.
-</div>
-</div>
-</div>
-
-<div class="section-label">🏰 महेश्वर (३:०० – ६:३० PM)</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">३:०० PM</span>
-<span>महेश्वर — अहिल्या किल्ला व घाट</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-राणी अहिल्याबाई होळकरांचा ऐतिहासिक किल्ला नर्मदेच्या काठावर थेट बसलेला आहे. कमी गर्दी, शाही वातावरण. संध्याकाळची आरती ~६ PM ला घाटावर — अत्यंत सुंदर अनुभव.
-</div>
-</div>
-</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~५:०० PM</span>
-<span>महेश्वरी साड्या — विणकर सहकारी संस्था</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-जगप्रसिद्ध महेश्वरी रेशीम साड्या किल्ल्यालगतच्या विणकर सहकारी संस्थेत उपलब्ध. अस्सल विणकरांकडून थेट विकत घेण्याची संधी. आई/घरच्यांसाठी उत्तम भेट!
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">६:३० PM</span>
-<span>महेश्वर → इंदूर प्रस्थान</span>
-</div>
-</div>
-</div>
-
-<div class="section-label">🌙 रात्री — सराफा बाजार</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">९:३० PM</span>
-<span>सराफा बाजार — नाईट फूड मार्केट</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-भुट्टे का कीस, गराडू, जोशी चाटचे दही वडा, मालपुआ, शिकंजी आणि दुधाबरोबर जिलेबी नक्की खा. हळूहळू चाला, प्रत्येक स्टॉलवर थांबा — हे जेवण नसून अनुभव आहे!
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-<!-- ═══════════════════ DAY 3 ═══════════════════ -->
-
+<!-- ═══════════ DAY 3 ═══════════ -->
 <div class="day-panel" id="panel-3">
 
-<div class="day-banner">
-<div class="day-title">
-दिवस ३ — मंगळवार, २४ मार्च | इंदूर दर्शन + ऐतिहासिक वारसा
-</div>
+  <div class="day-banner">
+    <div class="day-num">दिवस ३ · मंगळवार, २४ मार्च</div>
+    <div class="day-title">इंदूर दर्शन + ऐतिहासिक वारसा</div>
+    <div class="day-sub">मंदिरे · राजवाडे · संग्रहालय · ५६ दुकान</div>
+  </div>
+
+  <div class="section">🛕 सकाळची मंदिरे (८:३० – ११:३० AM)</div>
+  <div class="stop-list">
+    <div class="stop-group">
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>८:३० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">अन्नपूर्णा मंदिर</div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">दक्षिण भारतीय शैलीतील मंदिर — आतमध्ये काशी विश्वनाथ आणि पुरी जगन्नाथाच्या प्रतिकृती आहेत. अत्यंत शांत ठिकाण.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>९:१५ AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">खजराना गणपती</div>
+            <div class="stop-badges"><span class="badge blue">इंदूरचे जागृत देवस्थान</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">इंदूरचे सर्वात प्रसिद्ध आणि जागृत देवस्थान. अहिल्याबाई होळकर यांनी जिर्णोद्धार केलेले. इच्छा पूर्ण करणारा गणपती म्हणून प्रसिद्ध.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>१०:१५ AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">कांच मंदिर — जैन मंदिर</div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">संपूर्ण काचेने बनवलेले अनोखे जैन मंदिर. भिंती, छत, खांब — सर्वत्र रंगीत काचेचे नक्षीकाम. इंदूरच्या सर्वात वेगळ्या स्थळांपैकी एक.</div></div>
+      </div>
+
+      <div class="stop optional" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>~११:०० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">बडा गणपती मंदिर</div>
+            <div class="stop-badges"><span class="badge opt">वेळ मिळाल्यास</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">जगातील सर्वात उंच गणेश मूर्तींपैकी एक. कांच मंदिरापासून जवळच — एकाच रस्त्यावर दोन्ही पाहता येतात.</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">🏛️ ऐतिहासिक इंदूर (११:३० AM – १:०० PM)</div>
+  <div class="stop-list">
+    <div class="stop-group">
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>११:३० AM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">राजवाडा पॅलेस</div>
+            <div class="stop-badges"><span class="badge">₹१० प्रवेश</span><span class="badge">होळकर राजघराणे</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">होळकर राजघराण्याचे ७ मजली ऐतिहासिक निवासस्थान. मराठा, फ्रेंच आणि मुघल वास्तुशैलींचे मिश्रण — इंदूरचा जुना इतिहास.</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">🍽️ जेवण (१:०० PM)</div>
+  <div class="stop-list">
+    <div class="stop-group">
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>१:०० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">जेवण — Shreemaya Restaurant</div>
+            <div class="stop-badges"><span class="badge">दाल बाफला थाळी</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">इंदूरचे प्रसिद्ध रेस्टॉरंट. दाल बाफला थाळी नक्की मागवा — बाटीसारखाच पण मऊ, चुरमा आणि पंचमेल दाल. मध्यप्रदेशची खास चव.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">🏰 Heritage दुपार (२:३० – ५:३० PM)</div>
+  <div class="stop-list">
+    <div class="stop-group">
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>२:३० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">लाल बाग पॅलेस</div>
+            <div class="stop-badges"><span class="badge blue">आज मुख्य आकर्षण</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">होळकर राजांचा युरोपियन style चा भव्य राजवाडा — इटालियन मार्बल, व्हेनेशियन झुंबरे, इंग्लिश गार्डन. मजला flat, जास्त चालावे लागत नाही. आई-बाबांसाठी एकदम comfortable.</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>४:१५ PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">सेंट्रल म्युझियम</div>
+            <div class="stop-badges"><span class="badge blue">AC • आरामदायी</span><span class="badge">इंदूर संग्रहालय</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">इंदूरचे सर्वात underrated ठिकाण! परमार काळातील दुर्मिळ शिल्पे, होळकर कालखंडातील शस्त्रे व नाणी. संपूर्ण AC — मार्चच्या उष्णतेत मोठी सोय. लाल बाग पॅलेसपासून जवळच.</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">🍟 संध्याकाळी — ५६ दुकान (५:४५ – ७:०० PM)</div>
+  <div class="stop-list">
+    <div class="stop-group">
+      <div class="stop highlight" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>५:४५ PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">छप्पन दुकान — Evening Snacks</div>
+            <div class="stop-badges"><span class="badge blue">नागपूरला निघण्यापूर्वी!</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">संध्याकाळचा हलका नाश्ता — पोटभर जेवण नको! Vijay Chaat House चे खोपरा पेटिस, साबुदाणा खिचडी, Johnny Hot Dog वेज बर्गर. Shree Gopal Sweets मधून इंदोरी नमकीन आणि मिठाई पॅक करायला विसरू नका — नागपूरसाठी!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">🌙 प्रयाण</div>
+  <div class="stop-list">
+    <div class="stop-group">
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>७:३० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">हॉटेल — विश्रांती व सामान पॅक</div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">Check-out, सामान गाडीत. थोडी विश्रांती — लांब रात्रीच्या प्रवासापूर्वी.</div></div>
+      </div>
+
+      <div class="stop optional" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>~८:०० PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">राजवाडा — Light &amp; Sound Show</div>
+            <div class="stop-badges"><span class="badge opt">वेळ मिळाल्यास</span><span class="badge">~४५ मिनिटे</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">राजवाड्यावर होणारा लाईट अँड साऊंड शो इंदूरच्या इतिहासाची रोचक कथा सांगतो. यात्रेची grand finale!</div></div>
+      </div>
+
+      <div class="stop" onclick="toggle(this)">
+        <div class="stop-inner">
+          <div class="stop-time"><span>९–१०  PM</span></div>
+          <div class="stop-dot"></div>
+          <div class="stop-content">
+            <div class="stop-title">इंदूर → नागपूर प्रयाण 🙏</div>
+            <div class="stop-badges"><span class="badge">~५०० किमी · रात्रीचा प्रवास</span></div>
+          </div>
+          <div class="stop-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+        <div class="stop-tip"><div class="stop-tip-inner">८-९ तासांचा रात्रीचा प्रवास. सकाळी घरी! यात्रा पूर्ण — ३ ज्योतिर्लिंगे, आई-बाबांचा आशीर्वाद आणि इंदूरची चव — सगळ्या गोष्टी एकत्र! 🙏</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Food strip -->
+  <div class="spacer"></div>
+  <div class="food-strip">
+    <div class="food-label">यात्रेतील खाणे — नक्की चाखा</div>
+    <div class="food-tags">
+      <span class="food-tag">पोहे-जिलेबी</span>
+      <span class="food-tag">भुट्टे का कीस</span>
+      <span class="food-tag">दाल बाटी चुरमा</span>
+      <span class="food-tag">गराडू</span>
+      <span class="food-tag">मालपुआ रबडी</span>
+      <span class="food-tag">दाल बाफला</span>
+      <span class="food-tag">शिकंजी</span>
+      <span class="food-tag">इंदोरी नमकीन</span>
+    </div>
+  </div>
+
+  <!-- Tips card -->
+  <div class="tips-card" style="margin-top:8px;">
+    <div class="tips-title">प्रवास टिप्स</div>
+    <div class="tip-row"><span class="tip-icon">📱</span><span>Mahakal दर्शन slot shrimahakaleshwar.com वर आधीच बुक करा</span></div>
+    <div class="tip-row"><span class="tip-icon">💵</span><span>₹३,०००–४,००० रोख ठेवा — बहुतेक प्रसाद दुकाने cash only</span></div>
+    <div class="tip-row"><span class="tip-icon">🚗</span><span>Day 2 साठी private cab घ्या (₹२,५००–३,०००) — ओंकारेश्वर-महेश्वर एकत्र होतात</span></div>
+    <div class="tip-row"><span class="tip-icon">👗</span><span>सर्व मंदिरांमध्ये शालीन कपडे — खांदे आणि गुडघे झाकलेले</span></div>
+    <div class="tip-row"><span class="tip-icon">👟</span><span>Mahakal gate जवळ footwear cloak room आहे (₹२०)</span></div>
+  </div>
+
+  <div class="spacer"></div>
 </div>
 
-<div class="timeline">
-
-<div class="section-label">🛕 सकाळची मंदिरे (८:३० – ११:३० AM)</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">८:३० AM</span>
-<span>अन्नपूर्णा मंदिर व खजराना गणपती</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-अन्नपूर्णा मंदिर दक्षिण भारतीय शैलीत बांधलेले असून आतमध्ये काशी विश्वनाथ आणि पुरी जगन्नाथाच्या प्रतिकृती आहेत. खजराना गणपती हे इंदूरचे सर्वात जागृत देवस्थान — इच्छा पूर्ण करणारा गणपती.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">१०:३० AM</span>
-<span>कांच मंदिर (जैन मंदिर)</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-संपूर्ण काचेने बनवलेले हे जैन मंदिर अत्यंत अनोखे आहे. भिंती, छत, खांब — सर्वत्र रंगीत काचेचे नक्षीकाम. इंदूरच्या सर्वात वेगळ्या स्थळांपैकी एक.
-</div>
-</div>
-</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~११:०० AM</span>
-<span>मोठ्या गणपतीचे मंदिर (बडा गणपती)</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-येथे गणेशाची एक विशाल मूर्ती आहे, जी जगातील सर्वात उंच गणेश मूर्तींपैकी एक मानली जाते. कांच मंदिरापासून जवळच असल्याने एकाच रस्त्यावर दोन्ही पाहता येतात.
-</div>
-</div>
-</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~११:१५ AM</span>
-<span>रणजीत हनुमान मंदिर</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-इंदूरमधील अत्यंत लोकप्रिय हनुमान मंदिर. भाविकांमध्ये खूप श्रद्धा असलेले ठिकाण. जवळच असल्यास भेट देण्यासारखे.
-</div>
-</div>
-</div>
-
-<div class="section-label">🏛️ ऐतिहासिक इंदूर (११:३० AM – १:०० PM)</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">११:३० AM</span>
-<span>राजवाडा पॅलेस व जुना शहर फेरफटका</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-होळकर राजघराण्याचे ७ मजली ऐतिहासिक निवासस्थान. मराठा, फ्रेंच आणि मुघल वास्तुशैलींचे मिश्रण. प्रवेश शुल्क फक्त ₹१०.
-</div>
-</div>
-</div>
-
-<div class="section-label">🍽️ जेवण व छप्पन दुकान</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">१२:३० PM</span>
-<span>दुपारचे जेवण — Shreemaya Restaurant</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-इंदूरचे प्रसिद्ध रेस्टॉरंट. दाल बाफला थाळी — मध्यप्रदेशातील बाटीसारखा पण मऊ असलेला दाल बाफला, चुरमा आणि पंचमेल दाल नक्की खा.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">२:०० PM</span>
-<span>छप्पन दुकान (56 Dukaan)</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-Vijay Chaat House चे प्रसिद्ध खोपरा पेटिस आणि साबुदाणा खिचडी जरूर चाखा. Johnny Hot Dog येथे वेज हॉट डॉग देखील प्रसिद्ध आहे. इंदोरी नमकीन सोबत घ्यायला विसरू नका!
-</div>
-</div>
-</div>
-
-<div class="section-label">🏛️ संध्याकाळ — Heritage Indore (३:०० – ७:०० PM)</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">३:०० PM</span>
-<span>लाल बाग पॅलेस</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-होळकर राजांनी बांधलेला हा इंदूरचा सर्वात भव्य राजवाडा आहे. पूर्णपणे युरोपियन शैलीतील बांधकाम — इटालियन मार्बल, व्हेनेशियन झुंबरे, इंग्लिश बाग. आत शिरताच वेगळ्याच जगात गेल्यासारखे वाटते. मजला सपाट, जास्त चालावे लागत नाही — आई-बाबांसाठी एकदम suitable. प्रवेश शुल्क अत्यंत कमी.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">५:०० PM</span>
-<span>सेंट्रल म्युझियम (इंदूर संग्रहालय)</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-इंदूरचे सर्वात underrated ठिकाण! परमार काळातील दुर्मिळ शिल्पे, होळकर कालखंडातील शस्त्रे, नाणी आणि ऐतिहासिक वस्तू. संपूर्ण AC इमारत — बाहेरची उष्णता नाही, बसण्यासाठी जागा आहे. हळूहळू पाहता येते — आई-बाबांसाठी अगदी आरामदायी अनुभव. लाल बाग पॅलेसपासून अगदी जवळ आहे.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">७:०० PM</span>
-<span>हॉटेल — विश्रांती व सामान पॅक</span>
-</div>
-</div>
-</div>
-
-<div class="stop optional" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">~७:३० PM</span>
-<span>राजवाडा — लाईट अँड साऊंड शो</span>
-<span class="opt-badge">वेळ मिळाल्यास</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-राजवाड्यावर होणारा लाईट अँड साऊंड शो इंदूरच्या इतिहासाची रोचक कथा सांगतो. रात्री निघण्यापूर्वी वेळ असल्यास हा शो नक्की पहा — अंदाजे ४५ मिनिटे.
-</div>
-</div>
-</div>
-
-<div class="stop" onclick="toggle(this)">
-<div class="dot"></div>
-<div class="stop-card">
-<div class="stop-top">
-<span class="time-badge">९:०० – १०:०० PM</span>
-<span>इंदूर जंक्शन → नागपूरकडे प्रस्थान</span>
-<span class="expand-icon">▾</span>
-</div>
-<div class="stop-tip">
-~५०० किमी · ८-९ तासांचा रात्रीचा प्रवास. निघण्यापूर्वी Shree Gopal Sweets मधून इंदोरी नमकीन आणि मिठाई पॅक करायला विसरू नका!
-</div>
-</div>
-</div>
-
-</div>
-</div>
-<!-- end panels -->
-
-</div>
-</div>
+</div><!-- end page -->
 
 <script>
-
-function switchDay(n){
-document.querySelectorAll(".day-panel")
-  .forEach(p=>p.classList.remove("active"))
-document.getElementById("panel-"+n)
-  .classList.add("active")
-document.querySelectorAll(".tab")
-  .forEach(t=>t.classList.remove("active"))
-document.querySelectorAll(".tab")[n-1]
-  .classList.add("active")
+function switchDay(n) {
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab')[n - 1].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function toggle(el){
-el.classList.toggle("open")
+function toggle(el) {
+  el.classList.toggle('open');
 }
-
 </script>
-
 </body>
 </html>
